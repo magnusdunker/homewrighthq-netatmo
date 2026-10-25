@@ -1,0 +1,93 @@
+{
+  "body": {
+    "devices": [
+      {
+        "_id": "70:ee:50:00:00:01",
+        "date_setup": 1600000000,
+        "last_setup": 1600000000,
+        "type": "NAMain",
+        "last_status_store": 1761400000,
+        "module_name": "Stue",
+        "firmware": 202,
+        "wifi_status": 52,
+        "reachable": true,
+        "co2_calibrating": false,
+        "data_type": ["Temperature", "CO2", "Humidity", "Noise", "Pressure"],
+        "place": { "altitude": 20, "city": "Aarhus", "country": "DK", "timezone": "Europe/Copenhagen", "location": [10.2, 56.15] },
+        "station_name": "Hjemme",
+        "home_id": "5f0000000000000000000001",
+        "home_name": "Hjemme",
+        "dashboard_data": {
+          "time_utc": 1761399900,
+          "Temperature": 21.4,
+          "CO2": 612,
+          "Humidity": 47,
+          "Noise": 38,
+          "Pressure": 1013.2,
+          "AbsolutePressure": 1010.8,
+          "min_temp": 20.1,
+          "max_temp": 22.0,
+          "date_max_temp": 1761390000,
+          "date_min_temp": 1761350000,
+          "temp_trend": "stable",
+          "pressure_trend": "up"
+        },
+        "modules": [
+          {
+            "_id": "02:00:00:00:00:02",
+            "type": "NAModule1",
+            "module_name": "Ude",
+            "last_setup": 1600000000,
+            "data_type": ["Temperature", "Humidity"],
+            "battery_percent": 64,
+            "reachable": true,
+            "firmware": 50,
+            "last_message": 1761399950,
+            "last_seen": 1761399900,
+            "rf_status": 71,
+            "battery_vp": 5200,
+            "dashboard_data": { "time_utc": 1761399900, "Temperature": 8.3, "Humidity": 88, "min_temp": 6.1, "max_temp": 11.2, "temp_trend": "down" }
+          },
+          {
+            "_id": "06:00:00:00:00:03",
+            "type": "NAModule2",
+            "module_name": "Vind",
+            "data_type": ["Wind"],
+            "battery_percent": 80,
+            "reachable": true,
+            "firmware": 25,
+            "rf_status": 65,
+            "battery_vp": 5600,
+            "dashboard_data": { "time_utc": 1761399900, "WindStrength": 14, "WindAngle": 250, "GustStrength": 27, "GustAngle": 245, "max_wind_str": 31, "max_wind_angle": 240 }
+          },
+          {
+            "_id": "05:00:00:00:00:04",
+            "type": "NAModule3",
+            "module_name": "Regn",
+            "data_type": ["Rain"],
+            "battery_percent": 12,
+            "reachable": true,
+            "firmware": 12,
+            "rf_status": 80,
+            "battery_vp": 4100,
+            "dashboard_data": { "time_utc": 1761399900, "Rain": 0.202, "sum_rain_1": 0.808, "sum_rain_24": 3.4 }
+          },
+          {
+            "_id": "03:00:00:00:00:05",
+            "type": "NAModule4",
+            "module_name": "Soveværelse",
+            "data_type": ["Temperature", "CO2", "Humidity"],
+            "battery_percent": 0,
+            "reachable": false,
+            "firmware": 50,
+            "rf_status": 90
+          }
+        ]
+      }
+    ],
+    "user": { "mail": "a@b.dk", "administrative": { "lang": "da-DK", "reg_locale": "da-DK", "country": "DK", "unit": 0, "windunit": 0, "pressureunit": 0, "feel_like_algo": 0 } }
+  },
+  "status": "ok",
+  "time_exec": 0.03,
+  "time_server": 1761400000
+}

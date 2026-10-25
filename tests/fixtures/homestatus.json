@@ -1,0 +1,25 @@
+{
+  "status": "ok",
+  "time_server": 1761400000,
+  "body": {
+    "home": {
+      "id": "5f0000000000000000000001",
+      "rooms": [
+        { "id": "1001", "reachable": true, "anticipating": false, "heating_power_request": 0, "open_window": false, "therm_measured_temperature": 20.5, "therm_setpoint_temperature": 21, "therm_setpoint_start_time": 1761390000, "therm_setpoint_end_time": 0, "therm_setpoint_mode": "schedule" },
+        { "id": "1002", "reachable": true, "anticipating": false, "heating_power_request": 45, "open_window": true, "therm_measured_temperature": 19.8, "therm_setpoint_temperature": 23, "therm_setpoint_start_time": 1761395000, "therm_setpoint_end_time": 1761405800, "therm_setpoint_mode": "manual" }
+      ],
+      "modules": [
+        { "id": "70:ee:50:00:00:30", "type": "NAPlug", "firmware_revision": 240, "rf_strength": 107, "wifi_strength": 42 },
+        { "id": "04:00:00:00:00:10", "type": "NATherm1", "battery_state": "high", "battery_level": 4100, "boiler_valve_comfort_boost": false, "boiler_status": true, "firmware_revision": 75, "rf_strength": 60, "reachable": true, "bridge": "70:ee:50:00:00:30" },
+        { "id": "09:00:00:00:00:11", "type": "NRV", "battery_state": "medium", "battery_level": 2900, "firmware_revision": 79, "rf_strength": 70, "reachable": true, "bridge": "70:ee:50:00:00:30" },
+        { "id": "09:00:00:00:00:12", "type": "NRV", "battery_state": "very_low", "battery_level": 2200, "firmware_revision": 79, "rf_strength": 85, "reachable": true, "bridge": "70:ee:50:00:00:30" },
+        { "id": "70:ee:50:00:00:20", "type": "NACamera", "monitoring": "on", "sd_status": 4, "alim_status": 2, "is_local": true, "vpn_url": "https://prodvpn-eu-1.netatmo.net/restricted/10.0.0.1/abc/MTU,,", "reachable": true },
+        { "id": "70:ee:50:00:00:21", "type": "NOC", "monitoring": "off", "floodlight": "auto", "sd_status": 4, "alim_status": 2, "is_local": false, "reachable": true }
+      ],
+      "persons": [
+        { "id": "p-111", "last_seen": 1761399000, "out_of_sight": false },
+        { "id": "p-222", "last_seen": 1761300000, "out_of_sight": true }
+      ]
+    }
+  }
+}

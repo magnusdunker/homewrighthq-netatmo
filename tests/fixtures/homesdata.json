@@ -1,0 +1,45 @@
+{
+  "body": {
+    "homes": [
+      {
+        "id": "5f0000000000000000000001",
+        "name": "Hjemme",
+        "altitude": 20,
+        "coordinates": [10.2, 56.15],
+        "country": "DK",
+        "timezone": "Europe/Copenhagen",
+        "rooms": [
+          { "id": "1001", "name": "Stue", "type": "livingroom", "module_ids": ["04:00:00:00:00:10", "09:00:00:00:00:11"] },
+          { "id": "1002", "name": "Badeværelse", "type": "bathroom", "module_ids": ["09:00:00:00:00:12"] },
+          { "id": "1003", "name": "Entré", "type": "lobby", "module_ids": ["70:ee:50:00:00:20"] }
+        ],
+        "modules": [
+          { "id": "70:ee:50:00:00:30", "type": "NAPlug", "name": "Relæ", "setup_date": 1600000000, "modules_bridged": ["04:00:00:00:00:10", "09:00:00:00:00:11", "09:00:00:00:00:12"] },
+          { "id": "04:00:00:00:00:10", "type": "NATherm1", "name": "Termostat", "setup_date": 1600000000, "room_id": "1001", "bridge": "70:ee:50:00:00:30" },
+          { "id": "09:00:00:00:00:11", "type": "NRV", "name": "Ventil stue", "setup_date": 1600000000, "room_id": "1001", "bridge": "70:ee:50:00:00:30" },
+          { "id": "09:00:00:00:00:12", "type": "NRV", "name": "Ventil bad", "setup_date": 1600000000, "room_id": "1002", "bridge": "70:ee:50:00:00:30" },
+          { "id": "70:ee:50:00:00:20", "type": "NACamera", "name": "Kamera entré", "setup_date": 1600000000, "room_id": "1003" },
+          { "id": "70:ee:50:00:00:21", "type": "NOC", "name": "Kamera indkørsel", "setup_date": 1600000000 }
+        ],
+        "persons": [
+          { "id": "p-111", "pseudo": "Anna", "url": "https://netatmocameraimage.blob.core.windows.net/x" },
+          { "id": "p-222" }
+        ],
+        "temperature_control_mode": "heating",
+        "therm_mode": "schedule",
+        "therm_setpoint_default_duration": 180,
+        "schedules": []
+      },
+      {
+        "id": "5f0000000000000000000002",
+        "name": "Sommerhus",
+        "rooms": [],
+        "modules": []
+      }
+    ],
+    "user": { "email": "a@b.dk", "language": "da-DK", "locale": "da-DK", "feel_like_algorithm": 0, "unit_pressure": 0, "unit_system": 0, "unit_wind": 0, "id": "5e1a2b3c4d5e6f7a8b9c0d1e" }
+  },
+  "status": "ok",
+  "time_exec": 0.05,
+  "time_server": 1761400000
+}
