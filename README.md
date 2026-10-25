@@ -1,97 +1,97 @@
-# Netatmo til HomewrightHQ
+# Netatmo for HomewrightHQ
 
-En ekstern integration til [HomewrightHQ](https://github.com/magnusdunker/homewrighthq) for Netatmos vejrstation, termostat og radiatorventiler og de indendørs og udendørs kameraer, gennem Netatmos API.
+An external integration for [HomewrightHQ](https://github.com/magnusdunker/homewrighthq) for Netatmo's weather station, thermostat and radiator valves and the indoor and outdoor cameras, through Netatmo's API.
 
 ## Installation
 
-I HomewrightHQ: **Indstillinger → Integrationer → Fra GitHub**. Indsæt
+In HomewrightHQ: **Settings → Integrations → From GitHub**. Paste
 
 ```
 https://github.com/magnusdunker/homewrighthq-netatmo
 ```
 
-og tryk **Installér**.
+and press **Install**.
 
-Netatmo kræver, at du opretter din egen app:
+Netatmo requires you to create your own app:
 
-1. Log ind på [dev.netatmo.com](https://dev.netatmo.com) med din Netatmo-konto, den samme som i Netatmo-appen.
-2. Opret en app under **My apps**, og skriv en redirect URI, f.eks. din HomewrightHQ-adresse med `/auth/external/callback` efter: `http://localhost:8123/auth/external/callback`.
-3. Gem appens client ID og client secret.
+1. Log in at [dev.netatmo.com](https://dev.netatmo.com) with your Netatmo account, the same one as in the Netatmo app.
+2. Create an app under **My apps**, and enter a redirect URI, e.g. your HomewrightHQ address followed by `/auth/external/callback`: `http://localhost:8123/auth/external/callback`.
+3. Save the app's client ID and client secret.
 
-Tilføj derefter **Netatmo** under **Tilføj integration**, og skriv client ID, client secret og den samme redirect URI. Næste trin viser en adresse til Netatmos login. Når du har logget ind og givet adgang, sender Netatmo browseren til redirect-adressen. Den side kan vise en fejl; det gør ikke noget. Kopiér hele adressen fra browserens adresselinje (den indeholder `code=...`) og indsæt den i formularen.
+Then add **Netatmo** under **Add integration**, and enter the client ID, client secret and the same redirect URI. The next step shows an address for Netatmo's login. When you have logged in and granted access, Netatmo sends the browser to the redirect address. That page may show an error; that does not matter. Copy the whole address from the browser's address bar (it contains `code=...`) and paste it into the form.
 
-Det sidste trin er nødvendigt, fordi en ekstern integration i HomewrightHQ ikke kan tage imod Netatmos svar selv.
+The last step is needed because an external integration in HomewrightHQ cannot receive Netatmo's response itself.
 
-Integrationen beder om adgang til vejrstation, termostater og kameraer på én gang. Har du kun noget af det, er resten bare tomt.
+The integration asks for access to the weather station, thermostats and cameras at once. If you only have some of them, the rest is just empty.
 
-## Hvad du får
+## What you get
 
-Vejrstationen bliver en enhed for basen og en for hvert modul, med:
+The weather station becomes one device for the base and one for each module, with:
 
-- basen: temperatur, luftfugtighed, CO2, støj og lufttryk
-- udendørsmodul: temperatur og luftfugtighed
-- ekstra indendørsmodul: temperatur, luftfugtighed og CO2
-- regnmåler: regn i den seneste måling, sidste time og i dag
-- vindmåler: vind og vindstød i km/t og deres retning i grader
-- batteri i procent på modulerne og signalstyrke (slået fra som standard)
+- base: temperature, humidity, CO2, noise and air pressure
+- outdoor module: temperature and humidity
+- extra indoor module: temperature, humidity and CO2
+- rain gauge: rain in the latest measurement, the last hour and today
+- wind gauge: wind and gusts in km/h and their direction in degrees
+- battery in percent on the modules and signal strength (disabled by default)
 
-Mister et modul forbindelsen, bliver dets sensorer utilgængelige.
+If a module loses its connection, its sensors become unavailable.
 
-Hvert rum med termostat eller radiatorventil bliver en enhed med:
+Each room with a thermostat or radiator valve becomes a device with:
 
-- et klimaanlæg med tilstandene `auto` (følg ugeplanen), `heat` (manuel temperatur) og `off`, og forindstillingerne `schedule`, `manual`, `boost` (maks), `away` og `frost_guard`. Om rummet varmer (`hvac_action`), kommer fra rummets varmebehov, eller fra kedlens status, hvis Netatmo ikke oplyser det.
-- en sensor for åbent vindue
+- a climate entity with the modes `auto` (follow the weekly schedule), `heat` (manual temperature) and `off`, and the presets `schedule`, `manual`, `boost` (max), `away` and `frost_guard`. Whether the room is heating (`hvac_action`) comes from the room's heating demand, or from the boiler status if Netatmo does not report it.
+- a sensor for an open window
 
-`away` og `frost_guard` gælder hele hjemmet, sådan som Netatmo gør det, og det gør vejen tilbage til `schedule` fra dem også. En manuel temperatur varer så længe, som er sat i Netatmo-appen (normalt tre timer).
+`away` and `frost_guard` apply to the whole home, the way Netatmo does it, and so does going back to `schedule` from them. A manual temperature lasts as long as set in the Netatmo app (usually three hours).
 
-Termostater og radiatorventiler får en batterisensor (`full`, `high`, `medium`, `low`, `very_low`) og en sensor for lavt batteri. Termostaten får en sensor for, om kedlen er tændt.
+Thermostats and radiator valves get a battery sensor (`full`, `high`, `medium`, `low`, `very_low`) and a low battery sensor. The thermostat gets a sensor for whether the boiler is on.
 
-Kameraer (Smart Indoor og Outdoor Camera) får en kontakt for overvågning, og udendørskameraet et valg for projektøren (`auto`, `on`, `off`). Kendte personer, som kameraet har lært at genkende, bliver hver en tilstedeværelsessensor på hjemmet.
+Cameras (Smart Indoor and Outdoor Camera) get a switch for monitoring, and the outdoor camera a select for the floodlight (`auto`, `on`, `off`). Known persons that the camera has learned to recognize each become a presence sensor on the home.
 
-Der er ingen video, stillbilleder eller hændelser fra kameraerne. SDK'en til eksterne integrationer har ingen kamera-entity, og Netatmos hændelser kommer som webhooks, som en ekstern integration ikke kan tage imod.
+There is no video, no still images and no events from the cameras. The SDK for external integrations has no camera entity, and Netatmo's events arrive as webhooks, which an external integration cannot receive.
 
-## Opdatering og Netatmos grænser
+## Updates and Netatmo's limits
 
-Integrationen læser vejrstationerne og status for hvert hjem hvert femte minut, altså én forespørgsel plus én pr. hjem. Vejrstationen sender selv nye målinger hvert tiende minut. Under **Indstillinger** på integrationen kan tiden sættes fra 2 til 60 minutter. Siger Netatmo, at grænsen for forespørgsler er nået, holder integrationen pause i 30 minutter.
+The integration reads the weather stations and the status of each home every five minutes, that is one request plus one per home. The weather station itself sends new measurements every ten minutes. Under **Options** on the integration the interval can be set from 2 to 60 minutes. If Netatmo says the request limit has been reached, the integration pauses for 30 minutes.
 
-Efter en kommando opdaterer integrationen tilstanden selv, og den næste læsning henter det, Netatmo faktisk har sat.
+After a command the integration updates the state itself, and the next read fetches what Netatmo has in fact set.
 
-Adgangstokenet fornyes hver tredje time. Netatmo giver et nyt refresh token ved fornyelsen, og integrationen gemmer det på opsætningen. Afviser Netatmo det, viser HomewrightHQ det under problemer, og integrationen kan godkendes igen.
+The access token is renewed every three hours. Netatmo gives a new refresh token on renewal, and the integration saves it on the entry. If Netatmo rejects it, HomewrightHQ shows it under issues, and the integration can be authorized again.
 
-Rum, moduler og personer læses, når integrationen starter. Et nyt modul eller rum kommer med, når integrationen genindlæses.
+Rooms, modules and persons are read when the integration starts. A new module or room is included when the integration is reloaded.
 
-## Ikke afprøvet mod det rigtige API
+## Not tested against the real API
 
-Integrationen er skrevet ud fra Netatmos dokumentation af API'et og den måde, Home Assistants Netatmo-integration bruger det på, og afprøvet mod en falsk Netatmo med svar formet som de rigtige. Disse ting er ikke kontrolleret:
+The integration is written from Netatmo's API documentation and the way Home Assistant's Netatmo integration uses it, and tested against a fake Netatmo with responses shaped like the real ones. These things are not checked:
 
-- Om Netatmo godtager en `http://`-adresse eller en lokal adresse som redirect URI. Kræver den https, så brug en https-adresse: koden står i adresselinjen, også når siden ikke kan åbnes.
-- Fejlkoderne i Netatmos svar: 2 og 3 for et ugyldigt eller udløbet adgangstoken, 26 for brugt kvote, og om de kommer med HTTP 403.
-- Netatmos grænser på 50 forespørgsler pr. 10 sekunder og 500 i timen pr. bruger.
-- `setroomthermpoint` med `mode=off` for at slukke et rum, og at en manuel temperatur uden `endtime` varer den tid, der er sat i appen.
-- `setstate` med `monitoring` og `floodlight` på kameraerne, og at nye indendørskameraer (`NPC`) virker som de gamle.
-- At `wifi_status` og `rf_status` kan læses som dBm uden fortegn.
-- At `getstationsdata` altid giver metriske enheder (°C, mbar, mm, km/t), også når kontoen viser andre enheder i appen.
-- At `boiler_status` findes på OpenTherm-termostaten (`OTM`), og at Smarther (`BNS`) styres som de andre.
-- Felterne `battery_state`, `open_window`, `heating_power_request` og `out_of_sight` på rigtige anlæg.
+- Whether Netatmo accepts an `http://` address or a local address as redirect URI. If it requires https, use an https address: the code is in the address bar even when the page cannot be opened.
+- The error codes in Netatmo's responses: 2 and 3 for an invalid or expired access token, 26 for a used-up quota, and whether they come with HTTP 403.
+- Netatmo's limits of 50 requests per 10 seconds and 500 per hour per user.
+- `setroomthermpoint` with `mode=off` to turn off a room, and that a manual temperature without `endtime` lasts the time set in the app.
+- `setstate` with `monitoring` and `floodlight` on the cameras, and that new indoor cameras (`NPC`) work like the old ones.
+- That `wifi_status` and `rf_status` can be read as dBm without a sign.
+- That `getstationsdata` always gives metric units (°C, mbar, mm, km/h), even when the account shows other units in the app.
+- That `boiler_status` exists on the OpenTherm thermostat (`OTM`), and that Smarther (`BNS`) is controlled like the others.
+- The fields `battery_state`, `open_window`, `heating_power_request` and `out_of_sight` on real systems.
 
-Røgalarmer, CO-alarmer, dørklokke, sirener og Legrand/BTicino Home + Control er ikke med. Skift mellem ugeplaner er heller ikke med.
+Smoke alarms, CO alarms, doorbell, sirens and Legrand/BTicino Home + Control are not included. Switching between weekly schedules is not included either.
 
-## Udvikling
+## Development
 
-Bygget i Rust på SDK'en `thehome-plugin` fra [homewright-example-integration-rust](https://github.com/magnusdunker/homewrighthq-example-integration-rust).
+Built in Rust on the `thehome-plugin` SDK from [homewright-example-integration-rust](https://github.com/magnusdunker/homewrighthq-example-integration-rust).
 
-- `src/api.rs`: OAuth og Netatmos API
-- `src/model.rs`: Netatmos data og hvordan de bliver til tilstande og kommandoer
-- `src/lib.rs`: forbindelsen til HomewrightHQ
-- `tests/netatmo.rs`: tests mod en falsk Netatmo med svarene i `tests/fixtures`, og en falsk HomewrightHQ i `tests/host`
+- `src/api.rs`: OAuth and Netatmo's API
+- `src/model.rs`: Netatmo's data and how it becomes states and commands
+- `src/lib.rs`: the connection to HomewrightHQ
+- `tests/netatmo.rs`: tests against a fake Netatmo with the responses in `tests/fixtures`, and a fake HomewrightHQ in `tests/host`
 
 ```
 cargo test
 cargo build --release
 ```
 
-En ny version udgives med et tag, f.eks. `git tag v0.1.0 && git push origin v0.1.0`. Workflowet bygger til Windows, Linux (x86_64 og arm64, statisk musl) og macOS og lægger binærerne og `homewright.json` på releasen.
+A new version is released with a tag, e.g. `git tag v0.1.0 && git push origin v0.1.0`. The workflow builds for Windows, Linux (x86_64 and arm64, static musl) and macOS and puts the binaries and `homewright.json` on the release.
 
-## Licens
+## License
 
 MIT
